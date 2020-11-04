@@ -20,6 +20,8 @@ main{
     position: fixed;
     top: 0;
     right: 0;
+    font-size: 2em;
+    padding: 0.5em;
 }
 .Liste a{
     color: darkorange;
@@ -37,6 +39,18 @@ main{
 }
 #Schlusswort{
     margin: 1em;
+}
+#Ton{
+    margin-left: auto;
+    margin-right: auto;
+    color: darkcyan;
+    font-size: 3em;
+}
+#Gif{
+    margin-left: auto;
+    margin-right: auto;
+    color: darkcyan;
+    font-size: 3em;
 }
 #Foto img:hover{
     width: 500px;
@@ -89,17 +103,18 @@ footer a{
     margin-right: auto;
 }
 @media only screen and (min-width: 1024px){
-    body{
-        min-width: 1024;
+    #Foto img{
+        width: 600px;
     }
 }
 @media only screen and (max-width: 600px){
-    body{
-        max-width: 600px;
+    .Liste{
+        padding: 0;
+        width: 100%;
     }
 }
-@media only screen and (max-width: 1024px){
-    body{
-        max-width: 1024;
+@media only screen and (max-width: 1024px) and (min-width: 601px){
+    .Liste{
+        width: 50%;
     }
 }     
