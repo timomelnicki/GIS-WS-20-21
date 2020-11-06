@@ -125,6 +125,7 @@ footer a{
     margin-left: auto;
     margin-right: auto;
 }
+
 @media only screen and (min-width: 1024px){
     #Foto img{
         width: 600px;
@@ -140,4 +141,4 @@ footer a{
     .Liste{
         width: 50%;
     }
-}     
+}

@@ -1,0 +1,147 @@
+body{
+    font-family: "Calibri", Arial, serif;
+    margin:auto;
+    border: 3px solid green;
+    /*max-width: 800px;*/
+    background-image: url(../Images/Hintergrund.png);
+}
+main{
+    display: flex;
+    flex-direction: column;
+}
+#steck{
+    margin-left: auto;
+    margin-right: auto;
+}
+div h1{
+    color: darkcyan;
+}
+div>p{
+    color: limegreen;
+}
+div h3{
+    color: orangered;
+}
+footer p{
+    color: saddlebrown;
+}
+p+ul{
+    color: red;
+}
+label{
+    color: blue;
+}
+#social{
+    font-size: 2em;
+    margin-left: auto;
+    margin-right: auto;
+}
+.Liste{
+    overflow: hidden;
+    background-color: black;
+    color: darkorange;
+    position: fixed;
+    top: 0;
+    right: 0;
+    font-size: 2em;
+    padding: 0.5em;
+}
+.Liste a{
+    color: darkorange;
+    text-decoration: none;
+}
+.Liste a:hover{
+    color: white;
+}
+#Video{
+    margin-left: auto;
+    margin-right: auto;
+    color: darkcyan;
+    font-size: 3em;
+    border: 0;
+}
+#Schlusswort{
+    margin: 1em;
+}
+#Ton{
+    margin-left: auto;
+    margin-right: auto;
+    color: darkcyan;
+    font-size: 3em;
+}
+#Gif{
+    margin-left: auto;
+    margin-right: auto;
+    color: darkcyan;
+    font-size: 3em;
+}
+#Foto img:hover{
+    width: 500px;
+}
+#Foto img{
+    width: 300px;
+    transition: width 2s;
+}
+#Foto{
+    margin-left: auto;
+    margin-right: auto;
+    color: darkcyan;
+    font-size: 3em;
+}
+#aktuell{
+    color: greenyellow;
+}
+footer{
+    background-image: url(../Images/Hintergrund.png);
+}
+footer a{
+    color: darkorange;
+    background-image: url(../Images/Hintergrund.png);
+}
+.logo{
+    margin-left: auto;
+    margin-right: auto;
+}
+.logo :hover{
+        opacity: 0.3;
+}
+#logo{
+    margin-right: auto;
+    margin-left: auto;
+}
+#logo :hover{
+        opacity: 0.3;
+}
+.box{
+    display: flex;
+    flex-wrap: nowrap;
+}
+.box div{
+    text-align: center;
+    line-height: 75px;
+    font-size: 30px;
+}
+#con{
+    margin-left: auto;
+    margin-right: auto;
+}
+article{
+    margin-left: auto;
+    margin-right: auto;
+}
+@media only screen and (min-width: 1024px){
+    #Foto img{
+        width: 600px;
+    }
+}
+@media only screen and (max-width: 600px){
+    .Liste{
+        padding: 0;
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 1024px) and (min-width: 601px){
+    .Liste{
+        width: 50%;
+    }
+}     
