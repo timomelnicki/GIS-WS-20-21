@@ -1,9 +1,17 @@
 "use strict";
+function jsonlesen() {
+    let lesen = JSON.parse("BilderAuswahl.json");
+}
+async function jsondaten(_url) {
+    let response = await fetch(_url);
+    let daten = await response.json();
+    console.log("Test4", daten);
+}
 console.log("test1");
 function showTheList(json) {
-    console.log("Test3");
+    console.log("Test2");
     let arrItems;
-    arrItems = JSON.parse(json).Koepfe;
+    arrItems = json.Koepfe;
     let div = document.getElementById("Kopfbilder");
     div.innerHTML = "";
     for (let i = 0; i <= arrItems.length - 1; i++) {
@@ -16,7 +24,11 @@ function showTheList(json) {
         divRight.appendChild(img);
         div.appendChild(divLeft);
         div.appendChild(divRight);
-        console.log("Test2");
+        console.log("Test3");
     }
 }
+async function warten() {
+    await jsondaten("BilderAuswahl.json");
+}
+warten();
 //# sourceMappingURL=Anzeige.js.map
