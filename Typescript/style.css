@@ -1,4 +1,8 @@
+img {
+    width: 256px;
+    height: 256px;
+    margin-left: 40%;
+}
 body{
-    margin-left: auto;
-    margin-right: auto;
+    background-image: url(hintergrund.jpg);
 }

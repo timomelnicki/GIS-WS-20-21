@@ -1,38 +1,42 @@
 {
     "Koepfe": [{
-        "Pfad": "GIS-WS-20-21/Kopf",
+        "Pfad": "Kopf",
         "Name": "sandy_kopf.png" 
     },
     {
-        "Pfad": "GIS-WS-20-21/Kopf",
+        "Pfad": "Kopf",
         "Name": "handsomesquid_kopf.png"  
     },
     {
-        "Pfad": "GIS-WS-20-21/Kopf",
+        "Pfad": "Kopf",
         "Name": "tadkopf.png"
+    },
+    {
+        "Pfad": "Kopf",
+        "Name": "Spongeflower.png"
     }],
     "Koerper":[{
-        "Pfad": "GIS-WS-20-21/Koerper",
+        "Pfad": "Koerper",
         "Name": "sandy_koerper.png"    
     },
     {
-        "Pfad": "GIS-WS-20-21/Koerper",
+        "Pfad": "Koerper",
         "Name": "handsomesquid_koerper.png" 
     },
     {
-        "Pfad": "GIS-WS-20-21/Koerper",
+        "Pfad": "Koerper",
         "Name": "SQUIDWARD_Koerper.png" 
     }],
     "Beine":[{
-        "Pfad": "GIS-WS-20-21/Beine",
+        "Pfad": "Beine",
         "Name": "sandy_beine.png"
     },
     {
-        "Pfad": "GIS-WS-20-21/Beine",
+        "Pfad": "Beine",
         "Name": "handsomesquid_beine.png"
     },
     {
-        "Pfad": "GIS-WS-20-21/Beine",
+        "Pfad": "Beine",
         "Name": "SQUIDWARD_Beine.png"
     }]
     }
