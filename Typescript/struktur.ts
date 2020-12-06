@@ -9,30 +9,30 @@
 
     let page: string = document.body.id;
 
+    //jsondaten anfordern
     async function jsondaten(_url: string): Promise<void> {
         console.log("Start jsondaten");
         let response: Response = await fetch(_url);
-        let daten: any = await response.json();
+        let daten: any = await response.json();              //any als datentyp da es kurz verwendet wird um die daten aus der json zu bekommen
         console.log("All json", daten);
-        //let jsn: any = JSON.parse(daten);
         
-        koepfe = daten['Koepfe'];
-        koerper = daten['Koerper'];
-        beine = daten['Beine'];
+        koepfe = daten["Koepfe"];
+        koerper = daten["Koerper"];
+        beine = daten["Beine"];
 
         console.log("Koepfe", koepfe);
         console.log("Koerper", koerper);
         console.log("Beine", beine);
     
     }
-
+    //auf json Daten warten
     async function warten(): Promise<void> {
         console.log("Start warten");
         await jsondaten("BilderAuswahl.json");
     }
 
     
-
+    //weiter Button erstellen
     function weiter( _s: string, _testStorage: string): void {
         let divButton: HTMLElement =  document.getElementById("weiter");
         let weiterButton: HTMLButtonElement = document.createElement("button");
@@ -42,15 +42,16 @@
         weiterButton.addEventListener("click", link);
     
         function link(): void {
-        if (localStorage.getItem(_testStorage) == null ) {
-            alert("Bitte wählen Sie ein Bild aus");
-        }
-        else {
-            document.location.href = _s;
-        } 
-    }  
+            if (localStorage.getItem(_testStorage) == null ) {
+                alert("Bitte wählen Sie ein Bild aus");
+            }
+            else {
+                document.location.href = _s;
+            } 
+        }  
     }
 
+    //zurück Button erstellen
     function zurueck ( _s: string): void {
         let divButton: HTMLElement = document.getElementById("zurueck");
         let buttonWeiter: HTMLButtonElement = document.createElement("button");
@@ -63,7 +64,7 @@
             document.location.href = _s;
         }
     }
-    //(                         "Kopf",     "nameKopfStorage")
+    //Charakteransicht
     function createBildFinal (_id: string, _nameStorage: string): void {
         let _div: HTMLDivElement = <HTMLDivElement> document.getElementById(_id);
         let _img: HTMLImageElement = document.createElement("img");
@@ -73,11 +74,12 @@
     }
 
 
-//                       ( koerper,                , "storageKoerper",                  "nameKoerperStorage",     
+    //Bilderansicht der einzelnen Koerperteile     
     function createImages(_bilder: Array<Bild>, _koerperteilQuelleStorage: string, _koerperteilNameStorage: string): void {
         let divChoice: HTMLElement = document.getElementById("auswahl");
         let choice: HTMLImageElement = <HTMLImageElement> document.createElement("img");
 
+        //Bilder dem Array-Wert entsprechend erzeugen
         for (let i: number = 0; i < _bilder.length; i++) {
             let divKoerperteil: HTMLDivElement = document.createElement("div");
             let bildKoerperteil: HTMLImageElement = document.createElement("img");
@@ -89,23 +91,21 @@
             let divBilder: HTMLDivElement = <HTMLDivElement> document.getElementById("Koerperteile");
             divBilder.appendChild(divKoerperteil);
 
-            //Select a picture and display it in the selection div
+            //Bild auswählen und anzeigen
             function bildAuswahl(): void {
-                //let auswahlKoerperteil: string = _bilder[i].Pfad;
                 let auswahlName: string =  _bilder[i].Pfad + "/" + _bilder[i].Name;
                 localStorage.setItem(_koerperteilNameStorage, auswahlName);
                 choice.setAttribute("src", localStorage.getItem(_koerperteilNameStorage));
                 divChoice.appendChild(choice);
             }
-
             bildKoerperteil.addEventListener("click", bildAuswahl);
         }
     }
 
-    async function main() {
-        await warten();
+    async function main(): Promise<void> {
+        await jsondaten("BilderAuswahl.json");
         console.log("HI, my name is... ", page);
-        // Decide what to do on the individual pages
+        //Entscheidungen für die einzelnen Seiten
         switch (page)  {
 
 
@@ -130,8 +130,8 @@
                 createImages( beine,  "storageBeine", "nameBeineStorage");
                 break;
     
-            case "SeiteCharakteransicht": // Final page for overview
-                // Create the final picture
+            case "SeiteCharakteransicht":
+                // Endbild erzeugen
                 createBildFinal("Kopf", "nameKopfStorage");
                 createBildFinal("Koerper", "nameKoerperStorage");
                 createBildFinal("Beine", "nameBeineStorage");
@@ -139,5 +139,4 @@
                 break;
         }
     }
-main();
-//}
+    main();

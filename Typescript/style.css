@@ -1,12 +1,16 @@
 img {
-    width: 256px;
-    height: 256px;
+    width: 128px;
+    height: 128px;
     margin-left: 40%;
 }
 body{
     background-image: url(hintergrund.jpg);
 }
 h1{
-    margin-left: 40%;
-    color: yellow;
+    margin-left: 30%;
+    color: blue;
+    font-weight: bold;
+}
+#auswahl{
+    padding-top: 5%;
 }
