@@ -6,3 +6,7 @@ img {
 body{
     background-image: url(hintergrund.jpg);
 }
+h1{
+    margin-left: 40%;
+    color: yellow;
+}
