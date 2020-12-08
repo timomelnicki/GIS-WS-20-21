@@ -3,23 +3,20 @@ let koepfe;
 let koerper;
 let beine;
 let page = document.body.id;
+//jsondaten anfordern
 async function jsondaten(_url) {
     console.log("Start jsondaten");
     let response = await fetch(_url);
     let daten = await response.json();
     console.log("All json", daten);
-    //let jsn: any = JSON.parse(daten);
-    koepfe = daten['Koepfe'];
-    koerper = daten['Koerper'];
-    beine = daten['Beine'];
+    koepfe = daten.Koepfe;
+    koerper = daten.Koerper;
+    beine = daten.Beine;
     console.log("Koepfe", koepfe);
     console.log("Koerper", koerper);
     console.log("Beine", beine);
 }
-async function warten() {
-    console.log("Start warten");
-    await jsondaten("BilderAuswahl.json");
-}
+//weiter Button erstellen
 function weiter(_s, _testStorage) {
     let divButton = document.getElementById("weiter");
     let weiterButton = document.createElement("button");
@@ -35,6 +32,7 @@ function weiter(_s, _testStorage) {
         }
     }
 }
+//zurück Button erstellen
 function zurueck(_s) {
     let divButton = document.getElementById("zurueck");
     let buttonWeiter = document.createElement("button");
@@ -45,7 +43,18 @@ function zurueck(_s) {
         document.location.href = _s;
     }
 }
-//(                         "Kopf",     "nameKopfStorage")
+//Serveranfrage für Error oder Message
+async function serveranfrage(_kopf, _koerper, _beine, _url) {
+    let query = new URLSearchParams({ _kopf: localStorage.getItem(_kopf),
+        _koerper: localStorage.getItem(_koerper),
+        _beine: localStorage.getItem(_beine) });
+    _url = _url + "?" + query.toString();
+    let _antwort = await fetch(_url);
+    let _ausgabe = await _antwort.json();
+    let _text = document.getElementById("serverantwort");
+    _text.textContent = "Serverantwort: " + (_ausgabe.error || _ausgabe.message); //entweder error oder message ausgeben da anderes undefined
+}
+//Charakteransicht
 function createBildFinal(_id, _nameStorage) {
     let _div = document.getElementById(_id);
     let _img = document.createElement("img");
@@ -53,10 +62,11 @@ function createBildFinal(_id, _nameStorage) {
     _img.setAttribute("src", localStorage.getItem(_nameStorage));
     _div.appendChild(_img);
 }
-//                       ( koerper,                , "storageKoerper",                  "nameKoerperStorage",     
+//Bilderansicht der einzelnen Koerperteile     
 function createImages(_bilder, _koerperteilQuelleStorage, _koerperteilNameStorage) {
     let divChoice = document.getElementById("auswahl");
     let choice = document.createElement("img");
+    //Bilder dem Array-Wert entsprechend erzeugen
     for (let i = 0; i < _bilder.length; i++) {
         let divKoerperteil = document.createElement("div");
         let bildKoerperteil = document.createElement("img");
@@ -66,9 +76,8 @@ function createImages(_bilder, _koerperteilQuelleStorage, _koerperteilNameStorag
         divKoerperteil.appendChild(bildKoerperteil);
         let divBilder = document.getElementById("Koerperteile");
         divBilder.appendChild(divKoerperteil);
-        //Select a picture and display it in the selection div
+        //Bild auswählen und anzeigen
         function bildAuswahl() {
-            //let auswahlKoerperteil: string = _bilder[i].Pfad;
             let auswahlName = _bilder[i].Pfad + "/" + _bilder[i].Name;
             localStorage.setItem(_koerperteilNameStorage, auswahlName);
             choice.setAttribute("src", localStorage.getItem(_koerperteilNameStorage));
@@ -78,9 +87,9 @@ function createImages(_bilder, _koerperteilQuelleStorage, _koerperteilNameStorag
     }
 }
 async function main() {
-    await warten();
+    await jsondaten("BilderAuswahl.json");
     console.log("HI, my name is... ", page);
-    // Decide what to do on the individual pages
+    //Entscheidungen für die einzelnen Seiten
     switch (page) {
         case "SeiteKopf":
             weiter("Koerper.html", "nameKopfStorage");
@@ -97,15 +106,15 @@ async function main() {
             zurueck("Koerper.html");
             createImages(beine, "storageBeine", "nameBeineStorage");
             break;
-        case "SeiteCharakteransicht": // Final page for overview
-            // Create the final picture
+        case "SeiteCharakteransicht":
+            // Endbild erzeugen
             createBildFinal("Kopf", "nameKopfStorage");
             createBildFinal("Koerper", "nameKoerperStorage");
             createBildFinal("Beine", "nameBeineStorage");
             zurueck("Kopf.html");
+            serveranfrage("nameKopfStorage", "nameKoerperStorage", "nameBeineStorage", "https://gis-communication.herokuapp.com");
             break;
     }
 }
 main();
-//}
 //# sourceMappingURL=struktur.js.map

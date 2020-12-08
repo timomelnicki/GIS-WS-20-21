@@ -14,3 +14,8 @@ h1{
 #auswahl{
     padding-top: 5%;
 }
+#serverantwort{
+    margin-left: 25%;
+    color: blue;
+    font-weight: bold;
+}

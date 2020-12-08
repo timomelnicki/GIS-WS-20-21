@@ -2,7 +2,15 @@
         Pfad: string;
         Name: string;
     }
-
+    interface Daten {
+        Koepfe: Array<Bild>;
+        Koerper: Array<Bild>;
+        Beine: Array<Bild>;
+    }
+    interface Serverrueckgabe {
+        error: string;
+        message: string;
+    }
     let koepfe: Array<Bild>;
     let koerper: Array<Bild>;
     let beine: Array<Bild>;
@@ -13,25 +21,19 @@
     async function jsondaten(_url: string): Promise<void> {
         console.log("Start jsondaten");
         let response: Response = await fetch(_url);
-        let daten: any = await response.json();              //any als datentyp da es kurz verwendet wird um die daten aus der json zu bekommen
+        let daten: Daten = await response.json();
         console.log("All json", daten);
         
-        koepfe = daten["Koepfe"];
-        koerper = daten["Koerper"];
-        beine = daten["Beine"];
+        koepfe = daten.Koepfe;
+        koerper = daten.Koerper;
+        beine = daten.Beine;
 
         console.log("Koepfe", koepfe);
         console.log("Koerper", koerper);
         console.log("Beine", beine);
     
     }
-    //auf json Daten warten
-    async function warten(): Promise<void> {
-        console.log("Start warten");
-        await jsondaten("BilderAuswahl.json");
-    }
 
-    
     //weiter Button erstellen
     function weiter( _s: string, _testStorage: string): void {
         let divButton: HTMLElement =  document.getElementById("weiter");
@@ -63,6 +65,17 @@
         function link(): void {
             document.location.href = _s;
         }
+    }
+    //Serveranfrage für Error oder Message
+    async function serveranfrage(_kopf: string, _koerper: string, _beine: string, _url: string): Promise<void> {
+        let query: URLSearchParams = new URLSearchParams( { _kopf: localStorage.getItem(_kopf) ,
+                                                            _koerper: localStorage.getItem(_koerper) ,
+                                                            _beine: localStorage.getItem(_beine) } ) ;
+        _url = _url + "?" + query.toString();
+        let _antwort: Response = await fetch(_url);
+        let _ausgabe: Serverrueckgabe = await _antwort.json();
+        let _text: HTMLDivElement = <HTMLDivElement> document.getElementById("serverantwort");
+        _text.textContent = "Serverantwort: " + (_ausgabe.error || _ausgabe.message);                                  //entweder error oder message ausgeben da anderes undefined
     }
     //Charakteransicht
     function createBildFinal (_id: string, _nameStorage: string): void {
@@ -136,6 +149,7 @@
                 createBildFinal("Koerper", "nameKoerperStorage");
                 createBildFinal("Beine", "nameBeineStorage");
                 zurueck("Kopf.html");
+                serveranfrage("nameKopfStorage", "nameKoerperStorage", "nameBeineStorage", "https://gis-communication.herokuapp.com");
                 break;
         }
     }
