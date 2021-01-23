@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Registrierung</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="Typescripthtml.js" defer></script>
+</head>
+<body>
+    <p><b>Registrierung</b></p>
+        <form id="NutzerDaten">
+            <label for="fname">First name:</label><br>
+            <input type="text" id="fname" name="fname" value=""><br>
+            <label for="lname">Last name:</label><br>
+            <input type="text" id="lname" name="lname" value=""><br>
+            <label for="street">Straße+Hausnummer:</label><br>
+            <input type="text" id="strasseHauNr" name="strasseHauNr" value=""><br>
+            <label for="postnumberc">Postleitzahl:</label><br>
+            <input type="number" id="postzahl" name="postzahl" value=""><br>
+            <label for="city">Stadt:</label><br>
+            <input type="text" id="stadt" name="stadt" value=""><br>
+            <label for="mail">E-mail:</label><br>
+            <input type="text" id="email" name="email" value=""><br>
+            <label for="passcode">Passwort:</label><br>
+            <input type="password" id="passwort" name="passwort" value=""><br>
+            <input type="button" value="Registrieren" onclick="registrieren()"> 
+        </form>
+        <div id="Message">
+
+        </div>
+        <div>
+        <a href="Login.html">Sie sind bereits registriert?</a>
+        </div>
+        <div>
+            <a href="Userabfrage.html">Nutzer ausgeben</a>
+        </div>
+</body>
+</html>
